@@ -1,0 +1,12 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "tsconfig": "tsconfig.json",
+  "out": "docs/api",
+  "name": "Richcord API",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "sort": ["source-order"],
+  "cleanOutputDir": true
+}
