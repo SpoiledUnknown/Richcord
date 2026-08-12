@@ -1,0 +1,221 @@
+name: Release
+
+on:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    name: Validate Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: TypeScript check
+        run: npm run check
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Verify release version
+        shell: bash
+        run: |
+          RELEASE_VERSION="${GITHUB_REF_NAME#v}"
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
+
+          if [ "$RELEASE_VERSION" != "$PACKAGE_VERSION" ]; then
+            echo "Release version: $RELEASE_VERSION"
+            echo "package.json version: $PACKAGE_VERSION"
+            echo "Release tag and package.json version must match."
+            exit 1
+          fi
+
+  publish-npm:
+    name: Publish npm Package
+    needs: validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build package
+        run: npm run build
+
+      - name: Publish package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  build-linux:
+    name: Build Linux Executable
+    needs: validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Bundle CLI
+        run: |
+          mkdir -p release
+          npx esbuild dist/cli/index.js \
+            --bundle \
+            --platform=node \
+            --format=esm \
+            --outfile=release/richcord-cli.js
+
+      - name: Create SEA configuration
+        run: |
+          cat > release/sea-config.json <<'EOF'
+          {
+            "main": "release/richcord-cli.js",
+            "mainFormat": "module",
+            "output": "release/richcord-linux-x64",
+            "disableExperimentalSEAWarning": true
+          }
+          EOF
+
+      - name: Build Linux SEA
+        run: node --build-sea release/sea-config.json
+
+      - name: Make executable
+        run: chmod +x release/richcord-linux-x64
+
+      - name: Test Linux executable
+        run: ./release/richcord-linux-x64 --help
+
+      - name: Upload Linux executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: richcord-linux-x64
+          path: release/richcord-linux-x64
+
+  build-windows:
+    name: Build Windows Executable
+    needs: validate
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Bundle CLI
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path release
+
+          npx esbuild dist/cli/index.js `
+            --bundle `
+            --platform=node `
+            --format=esm `
+            --outfile=release/richcord-cli.js
+
+      - name: Create SEA configuration
+        shell: pwsh
+        run: |
+          @'
+          {
+            "main": "release/richcord-cli.js",
+            "mainFormat": "module",
+            "output": "release/richcord.exe",
+            "disableExperimentalSEAWarning": true
+          }
+          '@ | Set-Content release/sea-config.json
+
+      - name: Build Windows SEA
+        run: node --build-sea release/sea-config.json
+
+      - name: Test Windows executable
+        run: .\release\richcord.exe --help
+
+      - name: Upload Windows executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: richcord-windows-x64
+          path: release/richcord.exe
+
+  publish-release-assets:
+    name: Publish Release Assets
+    needs:
+      - publish-npm
+      - build-linux
+      - build-windows
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Linux executable
+        uses: actions/download-artifact@v4
+        with:
+          name: richcord-linux-x64
+          path: release-assets
+
+      - name: Download Windows executable
+        uses: actions/download-artifact@v4
+        with:
+          name: richcord-windows-x64
+          path: release-assets
+
+      - name: Upload release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" \
+            release-assets/richcord-linux-x64 \
+            release-assets/richcord.exe \
+            --clobber

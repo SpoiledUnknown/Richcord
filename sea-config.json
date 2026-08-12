@@ -1,0 +1,5 @@
+{
+  "main": "./build/richcord.cjs",
+  "mainFormat": "commonjs",
+  "output": "./build/richcord"
+}

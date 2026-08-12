@@ -1,22 +1,38 @@
 {
-  "name": "Richcord",
+  "name": "richcord",
   "version": "1.0.0",
-  "description": "![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) [![Docs Passing](https://img.shields.io/badge/Docs-Passing-brightgreen.svg)](https://github.com/SpoiledUnknown/Richcord-Presence/blob/main/README.md)",
-  "main": "index.js",
+  "description": "Cross-platform Discord Rich Presence client and CLI.",
   "type": "module",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "bin": {
+    "richcord": "./dist/cli/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch cli/index.ts",
     "start": "tsx cli/index.ts",
     "build": "tsc",
     "check": "tsc --noEmit",
-    "clean": "rm -rf dist",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
+    "clean": "rimraf dist",
+    "lint": "eslint src cli",
+    "lint:fix": "eslint src cli --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "docs": "typedoc",
-    "build:docs": "npm run build && npm run docs"
+    "build:docs": "npm run build && npm run docs",
+    "build:bundle": "npm run build && esbuild dist/cli/index.js --bundle --platform=node --format=cjs --outfile=build/richcord.cjs",
+    "build:sea": "npm run build:bundle && node --build-sea sea-config.json"
   },
   "repository": {
     "type": "git",
@@ -30,6 +46,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.1.2",
+    "esbuild": "^0.28.2",
     "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.9.6",
@@ -42,5 +59,8 @@
   "dependencies": {
     "commander": "^15.0.0",
     "inquirer": "^14.0.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
   }
 }
