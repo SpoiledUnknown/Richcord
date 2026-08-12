@@ -38,5 +38,9 @@
     "typedoc": "^0.28.20",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.66.0"
+  },
+  "dependencies": {
+    "commander": "^15.0.0",
+    "inquirer": "^14.0.2"
   }
 }

@@ -1,5 +1,5 @@
 import { SerializationError } from "../errors/SerializationError.js";
-import { IPCPacket } from "../types/protocols.js";
+import { IPCPacket } from "../types/Protocols.js";
 import { Opcode } from "./Opcodes.js";
 
 /**

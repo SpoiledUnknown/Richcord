@@ -9,7 +9,7 @@ import {
   ReadyEventData,
   RPCCommandPayload,
   RPCResponsePayload,
-} from "../types/protocols.js";
+} from "../types/Protocols.js";
 import { ILogger } from "../utils/Logger.js";
 import { Handshake } from "./Handshake.js";
 import { Opcode } from "./Opcodes.js";

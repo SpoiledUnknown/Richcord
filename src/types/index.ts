@@ -1,3 +1,3 @@
 export * from "./Activity.js";
 export * from "./Events.js";
-export * from "./protocols.js";
+export * from "./Protocols.js";

@@ -1,8 +1,13 @@
 // Core Library API
 export { RichcordClient } from "./core/RichcordClient.js";
-export { RichcordClientOptions, ResolvedRichcordConfig } from "./core/Config.js";
+
+export type { RichcordClientOptions, ResolvedRichcordConfig } from "./core/Config.js";
+
 export { ClientState } from "./core/State.js";
+
 export { RPCCommands, RPCConstraints, Defaults } from "./utils/Constants.js";
+
+export { UpdateService } from "./core/UpdateService.js";
 
 // Custom Typed Errors
 export {
@@ -15,18 +20,20 @@ export {
 } from "./errors/index.js";
 
 // Data Types and Interfaces
-export {
+export type {
   Activity,
-  ActivityType,
   ActivityTimestamps,
   ActivityAssets,
   ActivityParty,
   ActivitySecrets,
   ActivityButton,
-  DiscordUser,
-  ClientEvents,
 } from "./types/index.js";
 
+export { ActivityType } from "./types/index.js";
+
 // Transport Interfaces and Logger (for Custom Injection)
-export { ITransport } from "./rpc/transport/ITransport.js";
-export { ILogger, DefaultLogger } from "./utils/Logger.js";
+export type { ITransport } from "./rpc/transport/ITransport.js";
+
+export type { ILogger } from "./utils/Logger.js";
+
+export { DefaultLogger } from "./utils/Logger.js";

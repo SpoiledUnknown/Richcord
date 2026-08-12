@@ -1,5 +1,5 @@
 import { HandshakeError } from "../errors/HandshakeError.js";
-import { HandshakePayload } from "../types/protocols.js";
+import { HandshakePayload } from "../types/Protocols.js";
 import { Opcode } from "./Opcodes.js";
 import { Serializer } from "./Serializer.js";
 

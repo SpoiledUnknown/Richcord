@@ -29,3 +29,10 @@ export const RPCConstraints = {
   MAX_BUTTON_LABEL_LENGTH: 32,
   MAX_BUTTON_URL_LENGTH: 512,
 } as const;
+
+export const UpdateServices = {
+  GITHUB_REPOSITORY_OWNER: "SpoiledUnknown",
+  GITHUB_REPOSITORY_NAME: "Richcord",
+  GITHUB_REPOSITORY_URL: "https://github.com/SpoiledUnknown/Richcord",
+  VERSION: "1.0.0", //major.minor.patch
+};
