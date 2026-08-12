@@ -1,114 +1,186 @@
-# Richcord
-
-> NOTE:
-> This project is going through a major rewrite.
->
-> Custom IPC Core will be implemented.
->
-> new CLI system will be implemented.
->
-> new UI will be implemented.
-
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-[![Docs Passing](https://img.shields.io/badge/Docs-Passing-brightgreen.svg)](https://github.com/SpoiledUnknown/Richcord-Presence/blob/main/README.md)
-
 <p align="center">
-    <img src="public/Richcord.png" alt="Richord Presence" width="100px">
+  <img src="./public/Richcord.png" alt="Richcord" width="120" style="border-radius: 1rem">
 </p>
 
-## Table Of Content:
+<h1 align="center">Richcord</h1>
 
-1. [Description](#description)
-2. [Installation](#installation)
-   1. [Method 1](#method-1)
-   2. [Method 2](#method-2)
-3. [Setting up the dev environment](#how-to-setup-dev-environment)
-4. [Creating custom client](#custom-client-setup)
-5. [How to use](#how-to-use)
+<p align="center">
+  A customizable Discord Rich Presence application powered by a custom cross-platform IPC core.
+</p>
 
-## Description:
+<p align="center">
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+  </a>
+  <a href="https://spoiledunknown.github.io/Richcord-Presence/">
+    <img src="https://img.shields.io/badge/Documentation-GitHub%20Pages-blue.svg" alt="Documentation">
+  </a>
+</p>
 
-An advance discord rich presence software that allows a lot of customisation and control in hand of user without over
-complicating things.
+<br>
 
-## Installation:
+## 📖 Overview
 
-**Note:** _Method 2 requires the NodeJS installed in pc if not avaibale install
-from [here](https://nodejs.org/en/download/)._
+**Richcord** is a customizable Discord Rich Presence application that provides fine-grained control over your Discord activity without unnecessarily complicating the user experience.
 
-### Method 1:
+Richcord uses a custom, platform-agnostic IPC implementation to communicate directly with the Discord desktop client.
 
-- Download the executable from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.5.1).
-  - Double click the exe file.
-  - Go through the simple prompts.
-- Note: in some cases the exe file might not work in that case use bellow provided steps -
-  - Open terminal (non-admin)
-  - drag and drop the exe file to the ternimal window
-  - press enter.
+### ✨ Features
 
-### Method 2:
+- 🔌 Cross-platform Discord IPC
+- 🎮 Rich Presence activity configuration
+- 🔄 Automatic reconnection
+- 💾 Persistent configuration
+- 🖥️ Interactive CLI
+- 🔍 GitHub-based update checking
+- 🧩 Reusable Core API
 
-- Clone the repo, or download the source code
-  from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.0.2).
-- Open the ternimal at the location of the source code
-- Use `cd "path/to/inside/of/source-code/"`, to access the source code.
-- Run `npm install`.
-- Run `npm run start` or `node index.js`
+> [!NOTE]
+> Richcord is actively being developed. The Core and CLI are currently available, while additional frontend functionality is planned for future releases.
 
-## How To Setup Dev Environment:
+---
 
-- Install NodeJs from [here](https://nodejs.org/en/download/).
-- Clone the repo, or download the source code
-  from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.5.1).
-- Open it using [VS Code](https://code.visualstudio.com/download) or any other Code Editor/IDE.
-- Open console (in vs code press ctrl + `).
-- Run `npm install`
+## 📦 Installation
 
-## Custom Client Setup:
+### Requirements
 
-Go to the _[Discord Dev Portal](https://discord.com/developers/applications)_
+- [Node.js](https://nodejs.org/) 20 or newer
+- Discord Desktop
 
-1. Click on tthe _**New Application**_ button.
-   ![Step 1](/public/step%201.png)
-2. A new dailogue box appears.
-3. Enter the name of the application (_**This shows as the app name in discord status**_)
-4. Agree the terms of service.
-5. Click on _create_
-   ![Step 2](/public/step%202.png)
-6. Click on _Rich Presence_
-   ![Step 3](/public/step%203.png)
-7. Scroll a little and click on _Add Images_
-   - **Note:** _You can only add images more than 512x512 (1024x1024 is recommended)._
-   - **Note:** _You can add upto 300 images._
-     ![Step 4](/public/step%204.png)
-8. Write the name of the asset.
-   - **Note:** _You can't change the name once the asset is saved. If you want to change then delete and reupload the
-     asset._
-   - **Note:** _Remember the name you gave to the assets as they will have to write it as is while running the app_
-9. Click on _Save Changes_ and wait for changes to be saved.
-   ![Step 5](/public/step%205.png)
-10. Now again click on _General Information_.
-11. Scroll down a little bit to copy your client id.
-    ![Step 6](/public/step%206.png)
-12. Click on _Copy_.
-    ![Step 7](/public/step%207.png)
+### Install using npm
 
-#### The client setup is done, now you can just paste the client id when prompted.
+```bash
+npm install -g richcord
+```
 
-## How To Use:
+Verify the installation:
 
-1. The app first asks the _**Client ID**_, which we have created using above provided method.
-2. You then have to provide a _detail_ message. This message will be shown on detail area in discord
-3. Then you have to provide a _status_ for your app.
-4. Then provide the _Large Image Key_, the name of the asset uploaded in custom client setup.
-5. Then provide a message for Large Image.
-6. Same step for small image, write the name of small image asset.
-7. and again a message for small image.
-8. Then write the label for first button.
-9. Then give a URL for the first button.
-10. Follow the above 2 steps for second button as well
-11. And lastly tell whether you want the timestamps to be shown or not.
+```bash
+richcord --version
+```
 
-![Example](/public/example.png)
+> [!IMPORTANT]
+> Discord Desktop must be installed and running for Richcord to communicate with Discord.
 
-#### You are all done, now enjoy the Richcord by flexing on your virtual friends since you most likely don't have any irl friends.
+---
+
+## 🚀 Quick Start
+
+### 1. Configure your Discord Application
+
+Create an application through the [Discord Developer Portal](https://discord.com/developers/applications) and copy its **Application ID / Client ID**.
+
+Then run:
+
+```bash
+richcord config
+```
+
+### 2. Configure your Rich Presence
+
+```bash
+richcord set
+```
+
+This interactively configures your activity, including:
+
+- Activity type
+- Details and state
+- Timestamps
+- Images/assets
+- Buttons
+- Other Rich Presence properties
+
+### 3. Start Rich Presence
+
+```bash
+richcord start
+```
+
+### 4. Check status
+
+```bash
+richcord status
+```
+
+### 5. Stop Richcord
+
+```bash
+richcord stop
+```
+
+To clear the currently active Rich Presence without deleting your saved configuration:
+
+```bash
+richcord clear
+```
+
+> [!TIP]
+> Run `richcord --help` at any time to see all available commands.
+
+---
+
+## ⌨️ CLI Commands
+
+| Command             | Description                     |
+| -------------------- | -------------------------------- |
+| `richcord`           | Display basic information        |
+| `richcord help`       | Display available commands       |
+| `richcord version`    | Display the installed version    |
+| `richcord config`     | Configure Richcord                |
+| `richcord set`        | Configure Rich Presence           |
+| `richcord start`      | Start Rich Presence               |
+| `richcord stop`       | Stop the running instance         |
+| `richcord clear`      | Clear the active Rich Presence    |
+| `richcord reset`      | Reset saved configuration         |
+| `richcord status`     | Show current status               |
+| `richcord update`     | Check for a newer release         |
+
+**Global options:**
+
+```
+-h, --help       Show help
+-V, --version    Show version
+```
+
+---
+
+## 🛠️ Development
+
+Clone the repository:
+
+```bash
+git clone https://github.com/SpoiledUnknown/Richcord.git
+cd Richcord
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Build the project:
+
+```bash
+npm run build
+```
+
+The project is written in TypeScript and consists of a reusable **Core** and a **CLI** frontend. The CLI consumes the Core's public API rather than implementing Discord IPC itself.
+
+> [!IMPORTANT]
+> Discord IPC, transports, handshaking, serialization, and other low-level RPC functionality belong to the Core and should not be implemented directly in the CLI.
+
+---
+
+## 📚 Documentation
+
+For complete documentation, including Core API and CLI documentation:
+
+**[📖 Read the Richcord Documentation](https://spoiledunknown.github.io/Richcord/)**
+
+---
+
+## 📄 License
+
+Richcord is licensed under the [MIT License](LICENSE.md).
