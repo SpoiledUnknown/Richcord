@@ -64,7 +64,9 @@ export class ConfigManager {
       return validateAndMigrateConfig(parsed);
     } catch (error) {
       if (error instanceof SyntaxError) {
-        throw new Error(`Configuration file at "${this.configPath}" is corrupted (invalid JSON).`, { cause: error });
+        throw new Error(`Configuration file at "${this.configPath}" is corrupted (invalid JSON).`, {
+          cause: error,
+        });
       }
       throw error;
     }
@@ -86,7 +88,9 @@ export class ConfigManager {
           // Ignore temp file cleanup error
         }
       }
-      throw new Error(`Failed to save configuration atomically: ${(error as Error).message}`, { cause: error });
+      throw new Error(`Failed to save configuration atomically: ${(error as Error).message}`, {
+        cause: error,
+      });
     }
   }
 

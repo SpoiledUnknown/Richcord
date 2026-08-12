@@ -122,19 +122,19 @@ richcord clear
 
 ## ⌨️ CLI Commands
 
-| Command             | Description                     |
-| -------------------- | -------------------------------- |
-| `richcord`           | Display basic information        |
-| `richcord help`       | Display available commands       |
-| `richcord version`    | Display the installed version    |
-| `richcord config`     | Configure Richcord                |
-| `richcord set`        | Configure Rich Presence           |
-| `richcord start`      | Start Rich Presence               |
-| `richcord stop`       | Stop the running instance         |
-| `richcord clear`      | Clear the active Rich Presence    |
-| `richcord reset`      | Reset saved configuration         |
-| `richcord status`     | Show current status               |
-| `richcord update`     | Check for a newer release         |
+| Command            | Description                    |
+| ------------------ | ------------------------------ |
+| `richcord`         | Display basic information      |
+| `richcord help`    | Display available commands     |
+| `richcord version` | Display the installed version  |
+| `richcord config`  | Configure Richcord             |
+| `richcord set`     | Configure Rich Presence        |
+| `richcord start`   | Start Rich Presence            |
+| `richcord stop`    | Stop the running instance      |
+| `richcord clear`   | Clear the active Rich Presence |
+| `richcord reset`   | Reset saved configuration      |
+| `richcord status`  | Show current status            |
+| `richcord update`  | Check for a newer release      |
 
 **Global options:**
 
