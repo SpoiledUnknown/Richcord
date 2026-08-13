@@ -30,15 +30,15 @@ Richcord uses a custom, platform-agnostic IPC implementation to communicate dire
 
 ### ✨ Features
 
-* 🔌 Cross-platform Discord IPC
-* 🎮 Rich Presence activity configuration
-* 🔄 Automatic reconnection
-* 💾 Persistent configuration
-* 🖥️ Interactive CLI
-* 🔍 GitHub-based update checking
-* 🧩 Reusable Core API
-* 📦 npm package
-* 🖥️ Standalone Linux and Windows executables
+- 🔌 Cross-platform Discord IPC
+- 🎮 Rich Presence activity configuration
+- 🔄 Automatic reconnection
+- 💾 Persistent configuration
+- 🖥️ Interactive CLI
+- 🔍 GitHub-based update checking
+- 🧩 Reusable Core API
+- 📦 npm package
+- 🖥️ Standalone Linux and Windows executables
 
 ---
 
@@ -48,8 +48,8 @@ Richcord can be installed either through **npm** or by downloading a standalone 
 
 ### Requirements
 
-* Discord Desktop
-* **Node.js 20 or newer** — only required when installing through npm
+- Discord Desktop
+- **Node.js 20 or newer** — only required when installing through npm
 
 > [!IMPORTANT]
 > Discord Desktop must be installed and running for Richcord to communicate with Discord.
@@ -162,12 +162,12 @@ richcord set
 
 This interactively configures your activity, including:
 
-* Activity type
-* Details and state
-* Timestamps
-* Images/assets
-* Buttons
-* Other Rich Presence properties
+- Activity type
+- Details and state
+- Timestamps
+- Images/assets
+- Buttons
+- Other Rich Presence properties
 
 ### 3. Start Rich Presence
 
