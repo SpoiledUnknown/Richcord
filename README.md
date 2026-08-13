@@ -12,8 +12,11 @@
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
   </a>
-  <a href="https://spoiledunknown.github.io/Richcord-Presence/">
+  <a href="https://spoiledunknown.github.io/Richcord/">
     <img src="https://img.shields.io/badge/Documentation-GitHub%20Pages-blue.svg" alt="Documentation">
+  </a>
+  <a href="https://www.npmjs.com/package/richcord">
+    <img src="https://img.shields.io/npm/v/richcord.svg" alt="npm version">
   </a>
 </p>
 
@@ -27,27 +30,35 @@ Richcord uses a custom, platform-agnostic IPC implementation to communicate dire
 
 ### ✨ Features
 
-- 🔌 Cross-platform Discord IPC
-- 🎮 Rich Presence activity configuration
-- 🔄 Automatic reconnection
-- 💾 Persistent configuration
-- 🖥️ Interactive CLI
-- 🔍 GitHub-based update checking
-- 🧩 Reusable Core API
-
-> [!NOTE]
-> Richcord is actively being developed. The Core and CLI are currently available, while additional frontend functionality is planned for future releases.
+* 🔌 Cross-platform Discord IPC
+* 🎮 Rich Presence activity configuration
+* 🔄 Automatic reconnection
+* 💾 Persistent configuration
+* 🖥️ Interactive CLI
+* 🔍 GitHub-based update checking
+* 🧩 Reusable Core API
+* 📦 npm package
+* 🖥️ Standalone Linux and Windows executables
 
 ---
 
 ## 📦 Installation
 
+Richcord can be installed either through **npm** or by downloading a standalone executable from the [GitHub Releases](https://github.com/SpoiledUnknown/Richcord/releases).
+
 ### Requirements
 
-- [Node.js](https://nodejs.org/) 20 or newer
-- Discord Desktop
+* Discord Desktop
+* **Node.js 20 or newer** — only required when installing through npm
 
-### Install using npm
+> [!IMPORTANT]
+> Discord Desktop must be installed and running for Richcord to communicate with Discord.
+
+### Option 1 — npm
+
+The npm package provides both the **Richcord Core API** and the **Richcord CLI**.
+
+#### Install the CLI globally
 
 ```bash
 npm install -g richcord
@@ -59,12 +70,79 @@ Verify the installation:
 richcord --version
 ```
 
-> [!IMPORTANT]
-> Discord Desktop must be installed and running for Richcord to communicate with Discord.
+You can then use Richcord directly from your terminal:
+
+```bash
+richcord --help
+```
+
+#### Install Core as a dependency
+
+If you are building an application on top of Richcord Core:
+
+```bash
+npm install richcord
+```
+
+Then import the Core API:
+
+```javascript
+import { RichcordClient } from "richcord";
+```
+
+Richcord is an **ES modules** only package.
+
+### Option 2 — Windows executable
+
+Download the latest **`richcord.exe`** from the [GitHub Releases](https://github.com/SpoiledUnknown/Richcord/releases).
+
+The executable is self-contained and does not require Node.js to be installed.
+
+You can place the executable somewhere on your system and add its directory to your `PATH` to use the `richcord` command globally.
+
+Verify the installation:
+
+```powershell
+richcord --version
+```
+
+### Option 3 — Linux executable
+
+Download the latest **`richcord-linux-x64`** executable from the [GitHub Releases](https://github.com/SpoiledUnknown/Richcord/releases).
+
+The executable is self-contained and does not require Node.js to be installed.
+
+Make it executable:
+
+```bash
+chmod +x richcord-linux-x64
+```
+
+You can then run it directly:
+
+```bash
+./richcord-linux-x64 --version
+```
+
+To use the `richcord` command globally, place or symlink the executable into a directory included in your `PATH`.
+
+For example:
+
+```bash
+sudo install richcord-linux-x64 /usr/local/bin/richcord
+```
+
+Then:
+
+```bash
+richcord --version
+```
 
 ---
 
 ## 🚀 Quick Start
+
+The following examples assume that Richcord is available as the `richcord` command through either the npm installation or a standalone executable.
 
 ### 1. Configure your Discord Application
 
@@ -84,12 +162,12 @@ richcord set
 
 This interactively configures your activity, including:
 
-- Activity type
-- Details and state
-- Timestamps
-- Images/assets
-- Buttons
-- Other Rich Presence properties
+* Activity type
+* Details and state
+* Timestamps
+* Images/assets
+* Buttons
+* Other Rich Presence properties
 
 ### 3. Start Rich Presence
 
@@ -138,10 +216,41 @@ richcord clear
 
 **Global options:**
 
-```
+```text
 -h, --help       Show help
 -V, --version    Show version
 ```
+
+---
+
+## 🏗️ Architecture
+
+Richcord consists of two primary layers:
+
+```text
+┌───────────────────────┐
+│          CLI          │
+│   User-facing app     │
+└───────────┬───────────┘
+            │
+            ▼
+┌───────────────────────┐
+│         Core          │
+│   Public API + IPC    │
+└───────────┬───────────┘
+            │
+            ▼
+┌───────────────────────┐
+│   Discord Desktop     │
+│      IPC Client       │
+└───────────────────────┘
+```
+
+The **Core** handles Discord IPC, transports, handshaking, serialization, validation, connection management, and the public API.
+
+The **CLI** consumes the Core's public API and contains no Discord IPC implementation.
+
+The Core is frontend-independent and can be consumed by other applications through the npm package.
 
 ---
 
@@ -166,6 +275,24 @@ Build the project:
 npm run build
 ```
 
+Check the project:
+
+```bash
+npm run check
+```
+
+Run the CLI during development:
+
+```bash
+npm run dev
+```
+
+Generate API documentation:
+
+```bash
+npm run build:docs
+```
+
 The project is written in TypeScript and consists of a reusable **Core** and a **CLI** frontend. The CLI consumes the Core's public API rather than implementing Discord IPC itself.
 
 > [!IMPORTANT]
@@ -175,9 +302,17 @@ The project is written in TypeScript and consists of a reusable **Core** and a *
 
 ## 📚 Documentation
 
-For complete documentation, including Core API and CLI documentation:
+For complete API documentation:
 
 **[📖 Read the Richcord Documentation](https://spoiledunknown.github.io/Richcord/)**
+
+For downloads and previous releases:
+
+**[📦 View GitHub Releases](https://github.com/SpoiledUnknown/Richcord/releases)**
+
+For the published npm package:
+
+**[📦 View Richcord on npm](https://www.npmjs.com/package/richcord)**
 
 ---
 

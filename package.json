@@ -37,13 +37,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SpoiledUnknown/Richcord-Presence.git"
+    "url": "git+https://github.com/SpoiledUnknown/Richcord.git"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/SpoiledUnknown/Richcord-Presence/issues"
+    "url": "https://github.com/SpoiledUnknown/Richcord/issues"
   },
-  "homepage": "https://github.com/SpoiledUnknown/Richcord-Presence#readme",
+  "homepage": "https://github.com/SpoiledUnknown/Richcord#readme",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.1.2",
