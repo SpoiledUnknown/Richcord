@@ -34,5 +34,5 @@ export const UpdateServices = {
   GITHUB_REPOSITORY_OWNER: "SpoiledUnknown",
   GITHUB_REPOSITORY_NAME: "Richcord",
   GITHUB_REPOSITORY_URL: "https://github.com/SpoiledUnknown/Richcord",
-  VERSION: "1.0.0", //major.minor.patch
+  VERSION: "1.0.1", //major.minor.patch
 };
