@@ -16,10 +16,10 @@ interface GitHubRelease {
 }
 
 export class UpdateService {
-  public async checkUpdate(): Promise<UpdateCheckResult> {
+  public async checkUpdate(githubRepositoryName: string = "Richcord"): Promise<UpdateCheckResult> {
     return new Promise((resolve) => {
       const currentVersion = UpdateServices.VERSION;
-      const url = `https://api.github.com/repos/${UpdateServices.GITHUB_REPOSITORY_OWNER}/${UpdateServices.GITHUB_REPOSITORY_NAME}/releases/latest`;
+      const url = `https://api.github.com/repos/${UpdateServices.GITHUB_REPOSITORY_OWNER}/${githubRepositoryName}/releases/latest`;
 
       const req = https.get(
         url,

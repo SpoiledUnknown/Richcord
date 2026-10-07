@@ -32,7 +32,5 @@ export const RPCConstraints = {
 
 export const UpdateServices = {
   GITHUB_REPOSITORY_OWNER: "SpoiledUnknown",
-  GITHUB_REPOSITORY_NAME: "Richcord",
-  GITHUB_REPOSITORY_URL: "https://github.com/SpoiledUnknown/Richcord",
-  VERSION: "1.1.0", //major.minor.patch
+  VERSION: "1.2.0", //major.minor.patch
 };

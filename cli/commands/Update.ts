@@ -17,7 +17,7 @@ export function registerUpdateCommand(program: Command, currentVersion: string):
         const result = await service.checkUpdate();
 
         if (result.hasUpdate) {
-          success(`A new version of Richcord is available: v${result.latestVersion}`);
+          success(`A new version of Richcord is available: ${result.latestVersion}`);
 
           if (result.releaseUrl) {
             info(`Release: ${result.releaseUrl}`);
