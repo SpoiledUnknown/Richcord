@@ -87,10 +87,14 @@ npm install richcord
 Then import the Core API:
 
 ```javascript
+// ESM
 import { RichcordClient } from "richcord";
+
+// CommonJS
+const { RichcordClient } = require("richcord");
 ```
 
-Richcord is an **ES modules** only package.
+Richcord provides dual-module support for both **ES modules** and **CommonJS**.
 
 ### Option 2 — Windows executable
 

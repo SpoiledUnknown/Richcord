@@ -38,6 +38,9 @@ jobs:
       - name: Build TypeScript
         run: npm run build
 
+      - name: Run compatibility tests
+        run: npm run test:compat
+
       - name: Verify release version
         shell: bash
         run: |

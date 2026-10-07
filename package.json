@@ -8,7 +8,8 @@
   "exports": {
     ".": {
       "types": "./dist/src/index.d.ts",
-      "import": "./dist/src/index.js"
+      "import": "./dist/src/index.js",
+      "require": "./dist/src/index.cjs"
     }
   },
   "bin": {
@@ -22,7 +23,8 @@
   "scripts": {
     "dev": "tsx watch cli/index.ts",
     "start": "tsx cli/index.ts",
-    "build": "tsc",
+    "build": "tsc && npm run build:lib:cjs",
+    "build:lib:cjs": "esbuild dist/src/index.js --bundle --platform=node --packages=external --format=cjs --sourcemap --outfile=dist/src/index.cjs",
     "check": "tsc --noEmit",
     "clean": "rimraf dist",
     "lint": "eslint src cli",
@@ -33,7 +35,9 @@
     "build:docs": "npm run build && npm run docs",
     "build:bundle": "npm run build && esbuild dist/cli/index.js --bundle --platform=node --format=cjs --outfile=build/richcord.cjs",
     "build:cli": "esbuild dist/cli/index.js --bundle --platform=node --format=cjs --outfile=release/richcord.cjs",
-    "build:sea": "npm run build:bundle && node --build-sea sea-config.json"
+    "build:sea": "npm run build:bundle && node --build-sea sea-config.json",
+    "test": "npm run test:compat",
+    "test:compat": "node test/compatibility/run.mjs"
   },
   "repository": {
     "type": "git",
